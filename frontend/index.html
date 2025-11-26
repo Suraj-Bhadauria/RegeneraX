@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regenerative City OS</title>
+    
+    <!-- 1. Leaflet CSS (For the Map) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <!-- 2. Tailwind CSS via CDN (No installation needed) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 3. Configure Custom Colors for the Hackathon Theme -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              border: "hsl(214.3 31.8% 91.4%)",
+              input: "hsl(214.3 31.8% 91.4%)",
+              ring: "hsl(222.2 84% 4.9%)",
+              background: "hsl(0 0% 100%)",
+              foreground: "hsl(222.2 84% 4.9%)",
+              primary: {
+                DEFAULT: "#10b981", // Emerald Green
+                foreground: "#ffffff",
+              },
+              destructive: {
+                DEFAULT: "#ef4444", // Pollution Red
+                foreground: "#ffffff",
+              },
+              muted: {
+                 DEFAULT: "#f1f5f9",
+                 foreground: "#64748b"
+              },
+              card: {
+                DEFAULT: "#ffffff",
+                foreground: "#0f172a"
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom Animation Styles -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      
+      /* --- FIX HERE: Prevents Tailwind from breaking Map Tiles --- */
+      .leaflet-pane img, 
+      .leaflet-tile, 
+      .leaflet-marker-icon, 
+      .leaflet-marker-shadow {
+        max-width: none !important;
+        max-height: none !important;
+      }
+
+      /* Leaflet Fix for React */
+      .leaflet-container {
+        width: 100%;
+        height: 100%;
+        background: #f0f0f0; /* Light grey background while tiles load */
+      }
+
+      /* Pulse Animation for Map Markers */
+      .marker-pulse {
+        animation: pulse-animation 2s infinite;
+      }
+      @keyframes pulse-animation {
+        0% { box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2); }
+        100% { box-shadow: 0 0 0 20px rgba(0, 0, 0, 0); }
+      }
+      
+      /* Chat Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; 
+        border-radius: 3px;
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
